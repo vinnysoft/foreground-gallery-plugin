@@ -64,7 +64,7 @@ OnItemClickListener {
         super.onCreate(savedInstanceState);        
         // Request progress bar
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.galeriapardal);
+        setContentView(R.layout.gallery);
 
         display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
@@ -191,7 +191,7 @@ OnItemClickListener {
             	}
                 cursor.moveToPosition(i);
                 imageID = cursor.getInt(columnIndex);
-                sequencialImageID.put(new Integer(i), imageID);
+                sequencialImageID.put(Integer.valueOf(i), imageID);
                     
 				bitmap = MediaStore.Images.Thumbnails.getThumbnail(
 						getContentResolver(), imageID,
@@ -314,7 +314,7 @@ OnItemClickListener {
     	Uri uri = Uri.parse(MediaStore.Images.Media.EXTERNAL_CONTENT_URI + "/" + imageID);
     	getIntent().setData(uri);
     	setResult(RESULT_OK, getIntent());
-    	finish();
-    }
+		finish();
+	}
 
 }
