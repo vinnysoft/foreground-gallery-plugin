@@ -114,7 +114,7 @@ public class ForegroundGalleryLauncher extends CameraLauncher
         {
 
             Uri uri = intent.getData();
-            ContentResolver resolver = this.ctx.getContentResolver();
+            ContentResolver resolver = this.ctx.getActivity().getContentResolver();
 
             try
             {
