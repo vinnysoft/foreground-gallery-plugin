@@ -1,5 +1,5 @@
 /*
-	    Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinícius Fonseca. 
+	    Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinï¿½cius Fonseca. 
 
 		Licensed under the Apache License, Version 2.0 (the "License");
 		you may not use this file except in compliance with the License.
@@ -16,8 +16,10 @@
 
 package com.foregroundgalleryplugin;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.cordova.CameraLauncher;
 import org.apache.cordova.api.Plugin;
 import org.apache.cordova.api.PluginResult;
@@ -29,12 +31,14 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 
 public class ForegroundGalleryLauncher extends CameraLauncher
 {
 
-    private int mQuality;// high compression, 100=compress of max quality)
+	private int mQuality; // Compression quality hint (0-100: 0=low quality &
+    // high compression, 100=compress of max quality)
     private int targetWidth; // desired width of the image
     private int targetHeight; // desired height of the image	
     public String callbackId;
@@ -135,6 +139,30 @@ public class ForegroundGalleryLauncher extends CameraLauncher
         {
             this.failPicture("Selection did not complete!");
         }
+    }
+    
+    public void processPicture(Bitmap bitmap)
+    {
+        ByteArrayOutputStream jpeg_data = new ByteArrayOutputStream();
+        try
+        {
+            if (bitmap.compress(CompressFormat.JPEG, mQuality, jpeg_data))
+            {
+                byte[] code = jpeg_data.toByteArray();
+                byte[] output = Base64.encodeBase64(code);
+                String js_out = new String(output);
+                this.success(new PluginResult(PluginResult.Status.OK,
+                        "data:image/jpeg;base64," + js_out), this.callbackId);
+                js_out = null;
+                output = null;
+                code = null;
+            }
+        }
+        catch (Exception e)
+        {
+            this.failPicture("Error compressing image.");
+        }
+        jpeg_data = null;
     }
 
     /**
