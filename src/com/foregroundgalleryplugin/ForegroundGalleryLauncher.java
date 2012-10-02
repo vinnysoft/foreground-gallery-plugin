@@ -1,3 +1,19 @@
+/*
+	    Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinícius Fonseca. 
+
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		See the License for the specific language governing permissions and
+   		limitations under the License.   			
+*/
+
 package com.foregroundgalleryplugin;
 
 import java.io.FileNotFoundException;
@@ -15,15 +31,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-public class GalleryLauncher extends CameraLauncher
+public class ForegroundGalleryLauncher extends CameraLauncher
 {
 
-    private int mQuality; // Compression quality hint (0-100: 0=low quality &
-    // high compression, 100=compress of max quality)
+    private int mQuality;// high compression, 100=compress of max quality)
     private int targetWidth; // desired width of the image
     private int targetHeight; // desired height of the image	
     public String callbackId;
-
+       
     /**
      * Executes the request and returns PluginResult.
      * 
@@ -43,14 +58,12 @@ public class GalleryLauncher extends CameraLauncher
         {
             this.targetHeight = 0;
             this.targetWidth = 0;
-            this.mQuality = 80;
-
             JSONObject options = args.optJSONObject(0);
             if (options != null)
             {
                 this.targetHeight = options.getInt("targetHeight");
                 this.targetWidth = options.getInt("targetWidth");
-                this.mQuality = options.getInt("quality");
+                options.getInt("quality");
             }
 
             this.getImage();
@@ -71,8 +84,8 @@ public class GalleryLauncher extends CameraLauncher
      */
     public void getImage()
     {
-        Intent intent = new Intent(cordova.getActivity().getApplicationContext() , GalleryActivity.class);
-        cordova.startActivityForResult((Plugin) this, intent, 11);
+        Intent intent = new Intent(this.ctx.getContext() , GalleryActivity.class);
+        this.ctx.startActivityForResult((Plugin) this, intent, 11);
     }
 
     /**
@@ -97,7 +110,7 @@ public class GalleryLauncher extends CameraLauncher
         {
 
             Uri uri = intent.getData();
-            ContentResolver resolver = cordova.getActivity().getContentResolver();
+            ContentResolver resolver = this.ctx.getContentResolver();
 
             try
             {
