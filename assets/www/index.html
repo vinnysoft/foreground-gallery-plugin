@@ -18,49 +18,49 @@
 	function onDeviceReady() {
 		pictureSource = navigator.camera.PictureSourceType;
 		destinationType = navigator.camera.DestinationType;
+	}
 
-		// Called when a photo is successfully retrieved
+	// Called when a photo is successfully retrieved
+	//
+	function onGallerySuccess(imageURI) {
+		// Uncomment to view the image file URI 
+		console.log('--->' + imageURI);
+
+		// Get image handle
 		//
-		function onGallerySuccess(imageURI) {
-			// Uncomment to view the image file URI 
-			console.log('--->' + imageURI);
+		var largeImage = document.getElementById('largeImage');
 
-			// Get image handle
-			//
-			var largeImage = document.getElementById('largeImage');
-
-			// Unhide image elements
-			//
-			largeImage.style.display = 'block';
-
-			// Show the captured photo
-			// The inline CSS rules are used to resize the image
-			//
-			largeImage.src = imageURI;
-		}
-
-		// Called if something bad happens.
-		// 
-		function onFail(message) {
-			alert('Failed because: ' + message);
-		}
-
-		// A button will call this function
+		// Unhide image elements
 		//
-		function choosePhoto() {
-			// Take picture using device camera and retrieve image as base64-encoded string
-			navigator.gallery.getPicture(onGallerySuccess, onFail, {
-				quality : 70,
-				targetWidth : 800,
-				targetHeight : 600
-			});
-		}
+		largeImage.style.display = 'block';
+
+		// Show the captured photo
+		// The inline CSS rules are used to resize the image
+		//
+		largeImage.src = imageURI;
+	}
+
+	// Called if something bad happens.
+	// 
+	function onFail(message) {
+		alert('Failed because: ' + message);
+	}
+
+	// A button will call this function
+	//
+	function choosePhoto() {
+		// Take picture using device camera and retrieve image as base64-encoded string
+		navigator.gallery.getPicture(onGallerySuccess, onFail, {
+			quality : 70,
+			targetWidth : 800,
+			targetHeight : 600
+		});
 	}
 </script>
 </head>
 <body>
 	<button onclick="choosePhoto();">Choose Album Photo</button>
 	<br>
-	<img style="display: none;" id="largeImage" src="" />
+	<img style="display:none;width:160px;height:160px;" id="largeImage" src="" />
 </body>
 </html>
