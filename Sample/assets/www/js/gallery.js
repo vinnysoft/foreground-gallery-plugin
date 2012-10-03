@@ -1,5 +1,5 @@
 /*
-	    Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinícius Fonseca. 
+	    Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinï¿½cius Fonseca. 
 
 		Licensed under the Apache License, Version 2.0 (the "License");
 		you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 */
 
 /**
- * This class provides access to the device camera.
+ * This class provides access to the gallery.
  *
  * @constructor
  */
@@ -26,11 +26,8 @@ var Gallery = function() {
 };
 
 /**
- * Gets a picture from source defined by "options.sourceType", and returns the
- * image as defined by the "options.destinationType" option.
-
- * The defaults are sourceType=CAMERA and destinationType=DATA_URL.
- *
+ * Function to set the parameters for using in gallery.
+ * 
  * @param {Function} successCallback
  * @param {Function} errorCallback
  * @param {Object} options
