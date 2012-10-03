@@ -89,8 +89,8 @@ public class ForegroundGalleryLauncher extends CameraLauncher
      */
     public void getImage()
     {
-        Intent intent = new Intent(this.ctx.getContext() , GalleryActivity.class);
-        this.ctx.startActivityForResult((Plugin) this, intent, 11);
+        Intent intent = new Intent(this.cordova.getActivity().getApplicationContext() , GalleryActivity.class);
+        this.cordova.startActivityForResult((Plugin) this, intent, 11);
     }
 
     /**
@@ -115,7 +115,7 @@ public class ForegroundGalleryLauncher extends CameraLauncher
         {
 
             Uri uri = intent.getData();
-            ContentResolver resolver = this.ctx.getActivity().getContentResolver();
+            ContentResolver resolver = this.cordova.getActivity().getContentResolver();
 
             try
             {
