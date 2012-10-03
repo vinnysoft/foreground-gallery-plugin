@@ -62,12 +62,13 @@ public class ForegroundGalleryLauncher extends CameraLauncher
         {
             this.targetHeight = 0;
             this.targetWidth = 0;
+            this.mQuality = 80;
             JSONObject options = args.optJSONObject(0);
             if (options != null)
             {
                 this.targetHeight = options.getInt("targetHeight");
                 this.targetWidth = options.getInt("targetWidth");
-                options.getInt("quality");
+                this.mQuality = options.getInt("quality");
             }
 
             this.getImage();
