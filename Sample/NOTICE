@@ -1,0 +1,9 @@
+Foreground Camera Plugin for Phonegap (Cordova) 2.1.0
+Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinícius Fonseca.
+
+This product includes software developed by
+The Apache Software Foundation (http://www.apache.org)
+
+- ForegroundGalleryLauncher.java was based on CameraLauncher from Cordova 2.1.0.
+- GalleryActivity.java was based on Mihai Fonoage's blog (http://mihaifonoage.blogspot.com/2009/11/displaying-images-from-sd-card-in.html)
+- gallery.js was based on cordova-2.1.0.js from Cordova 2.1.0

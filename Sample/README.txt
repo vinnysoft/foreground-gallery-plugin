@@ -24,12 +24,11 @@ The default Phonegap (Cordova) Gallery Plugin calls the native camera and this m
 Adding the plugin to your project
 
     1) To install the plugin, move the file gallery.js to your project's www folder and include a reference to it in your html files.
-    2) Put the Java files in your /src folder.
-    3) Include into /res/xml/config.xml the plugin <plugin name="Gallery" value="path to your ForegroundGalleryLauncher.java"/>    
-	4) Put the strings.xml in your /res/values folder.
-	5) Put the gallery.xml in your /res/layout folder.
-	6) Put commons-codec-1.6.jar and cordova-2.1.0.jar files in your /lib folder.
-	7) In you AndroidManifest.xml, put this permissions:
+    2) Put the Java files in your src/ folder.
+    3) Include into res/xml/config.xml the plugin <plugin name="Gallery" value="path to your ForegroundGalleryLauncher.java"/>    
+	4) Put the strings.xml in your res/values folder.
+	5) Put the gallery.xml in your res/layout folder.
+	6) In you AndroidManifest.xml, put this permissions:
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 					    
 		And declare the Gallery Activity:
