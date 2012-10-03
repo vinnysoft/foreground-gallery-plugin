@@ -39,4 +39,4 @@ Adding the plugin to your project
 
 Using the plugin
 
-	See the index.xhtml.
+	See the sample project.
