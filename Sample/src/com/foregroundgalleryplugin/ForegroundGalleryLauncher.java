@@ -26,6 +26,7 @@ import org.apache.cordova.api.CordovaPlugin;
 import org.apache.cordova.api.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -59,9 +60,13 @@ public class ForegroundGalleryLauncher extends CameraLauncher
 		this.targetWidth = 0;
 		this.mQuality = 80;
 		
-        this.mQuality = args.getInt(0);
-        this.targetWidth = args.getInt(3);
-        this.targetHeight = args.getInt(4);
+        JSONObject options = args.optJSONObject(0);
+        if (options != null)
+        {
+            this.targetHeight = options.getInt("targetHeight");
+            this.targetWidth = options.getInt("targetWidth");
+            this.mQuality = options.getInt("quality");
+        }
 
 		this.getImage();
 
@@ -128,7 +133,8 @@ public class ForegroundGalleryLauncher extends CameraLauncher
             this.failPicture("Selection did not complete!");
         }
     }
-    
+	
+  
     public void processPicture(Bitmap bitmap)
     {
         ByteArrayOutputStream jpeg_data = new ByteArrayOutputStream();
