@@ -1,5 +1,5 @@
 /*
-	    Copyright 2013 Bruno Carreira - Lucas Farias - Rafael Luna - Vinícius Fonseca. 
+	    Copyright 2012 Bruno Carreira - Lucas Farias - Rafael Luna - Vinï¿½cius Fonseca. 
 
 		Licensed under the Apache License, Version 2.0 (the "License");
 		you may not use this file except in compliance with the License.
@@ -21,11 +21,11 @@ import java.io.FileNotFoundException;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.cordova.CameraLauncher;
-import org.apache.cordova.api.Plugin;
+import org.apache.cordova.api.CallbackContext;
+import org.apache.cordova.api.CordovaPlugin;
 import org.apache.cordova.api.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -45,43 +45,30 @@ public class ForegroundGalleryLauncher extends CameraLauncher
        
     /**
      * Executes the request and returns PluginResult.
-     * 
-     * @param action
-     *            The action to execute.
-     * @param args
-     *            JSONArry of arguments for the plugin.
-     * @param callbackId
-     *            The callback id used when calling back into JavaScript.
-     * @return A PluginResult object with a status and message.
+     *
+     * @param action        	The action to execute.
+     * @param args          	JSONArry of arguments for the plugin.
+     * @param callbackContext   The callback id used when calling back into JavaScript.
+     * @return              	A PluginResult object with a status and message.
      */
-    public PluginResult execute(String action, JSONArray args, String callbackId)
-    {
-        this.callbackId = callbackId;
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        try
-        {
-            this.targetHeight = 0;
-            this.targetWidth = 0;
-            this.mQuality = 80;
-            JSONObject options = args.optJSONObject(0);
-            if (options != null)
-            {
-                this.targetHeight = options.getInt("targetHeight");
-                this.targetWidth = options.getInt("targetWidth");
-                this.mQuality = options.getInt("quality");
-            }
+    	this.callbackContext = callbackContext;
 
-            this.getImage();
+		this.targetHeight = 0;
+		this.targetWidth = 0;
+		this.mQuality = 80;
+		
+        this.mQuality = args.getInt(0);
+        this.targetWidth = args.getInt(3);
+        this.targetHeight = args.getInt(4);
 
-            PluginResult r = new PluginResult(PluginResult.Status.NO_RESULT);
-            r.setKeepCallback(true);
-            return r;
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return new PluginResult(PluginResult.Status.JSON_EXCEPTION);
-        }
+		this.getImage();
+
+		PluginResult r = new PluginResult(PluginResult.Status.NO_RESULT);
+		r.setKeepCallback(true);
+		callbackContext.sendPluginResult(r);
+		return true;
     }
 
     /**
@@ -90,7 +77,7 @@ public class ForegroundGalleryLauncher extends CameraLauncher
     public void getImage()
     {
         Intent intent = new Intent(this.cordova.getActivity().getApplicationContext() , GalleryActivity.class);
-        this.cordova.startActivityForResult((Plugin) this, intent, 11);
+        this.cordova.startActivityForResult((CordovaPlugin) this, intent, 11);
     }
 
     /**
@@ -152,8 +139,7 @@ public class ForegroundGalleryLauncher extends CameraLauncher
                 byte[] code = jpeg_data.toByteArray();
                 byte[] output = Base64.encodeBase64(code);
                 String js_out = new String(output);
-                this.success(new PluginResult(PluginResult.Status.OK,
-                        "data:image/jpeg;base64," + js_out), this.callbackId);
+                this.callbackContext.success("data:image/jpeg;base64," + js_out);
                 js_out = null;
                 output = null;
                 code = null;
