@@ -12,7 +12,7 @@
 		See the License for the specific language governing permissions and
    		limitations under the License.  
 
-Foreground Gallery Plugin for Phonegap (Cordova) 2.1.0.
+Foreground Gallery Plugin for Phonegap (Cordova)
 
 Originally by: 	- Bruno Carreira
 				- Lucas Farias
@@ -28,7 +28,7 @@ Adding the plugin to your project
     3) Include into /res/xml/config.xml the plugin <plugin name="Gallery" value="path to your ForegroundGalleryLauncher.java"/>    
 	4) Put the strings.xml in your /res/values folder.
 	5) Put the gallery.xml in your /res/layout folder.
-	6) Put commons-codec-1.6.jar and cordova-2.1.0.jar files in your /lib folder.
+	6) Put commons-codec-1.6.jar and cordova-X.X.X.jar files in your /lib folder.
 	7) In you AndroidManifest.xml, put this permissions:
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 					    
