@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -174,7 +173,6 @@ public class GalleryActivity extends Activity implements OnItemClickListener {
 		 * 
 		 * @see android.os.AsyncTask#doInBackground(Params[])
 		 */
-		@SuppressLint("UseSparseArrays")
 		@Override
 		protected Integer doInBackground(Object... params) {
 			Bitmap bitmap = null;
