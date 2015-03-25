@@ -19,7 +19,7 @@ Contact if you want to help us to maintain and grow up this plugin! :)
 
 ## Download ##
 
-Please see: http://code.google.com/p/foreground-gallery-plugin/downloads/list
+Please see: https://github.com/vinnysoft/foreground-gallery-plugin/releases
 
 ## Adding the plugin to your project ##
 1) To install the plugin, move the file **gallery.js** to your project's **/www** folder and include a reference to it in your html files.
